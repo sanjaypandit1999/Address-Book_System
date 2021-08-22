@@ -1,22 +1,21 @@
 package com.Bridgelabz;
 
 public class PersonInfo {
+
     private String firstName;
     private String lastName;
-    private  String address;
+    private String address;
     private String city;
     private String state;
     private String zip;
     private String phoneNo;
     private String email;
-    //setters
-    public String getfirstName() {
 
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setfirstName(String firstName) {
-
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
@@ -36,20 +35,20 @@ public class PersonInfo {
         this.address = address;
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     public String getState() {
         return state;
     }
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getZip() {
@@ -60,14 +59,6 @@ public class PersonInfo {
         this.zip = zip;
     }
 
-    public String getPhoneNo() {
-        return phoneNo;
-    }
-
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -76,4 +67,25 @@ public class PersonInfo {
         this.email = email;
     }
 
+    public String getPhoneNo() {
+        return phoneNo;
+    }
+
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
+    }
+
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", zip=" + zip +
+                ", phoneNo=" + phoneNo +
+                ", email='" + email + '\'' +
+                '}' + '\n';
+    }
 }
