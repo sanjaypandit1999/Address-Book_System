@@ -7,8 +7,8 @@ public class PersonInfo {
     private String address;
     private String city;
     private String state;
-    private String zip;
-    private String phoneNo;
+    private int zip;
+    private long phoneNo;
     private String email;
 
     public String getFirstName() {
@@ -51,11 +51,11 @@ public class PersonInfo {
         this.city = city;
     }
 
-    public String getZip() {
+    public int getZip() {
         return zip;
     }
 
-    public void setZip(String zip) {
+    public void setZip(int zip) {
         this.zip = zip;
     }
 
@@ -67,17 +67,17 @@ public class PersonInfo {
         this.email = email;
     }
 
-    public String getPhoneNo() {
+    public long getPhoneNo() {
         return phoneNo;
     }
 
-    public void setPhoneNo(String phoneNo) {
+    public void setPhoneNo(long phoneNo) {
         this.phoneNo = phoneNo;
     }
 
     @Override
     public String toString() {
-        return "Contact{" +
+        return "PersonInfo{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", address='" + address + '\'' +
@@ -85,7 +85,6 @@ public class PersonInfo {
                 ", state='" + state + '\'' +
                 ", zip=" + zip +
                 ", phoneNo=" + phoneNo +
-                ", email='" + email + '\'' +
-                '}' + '\n';
+                ", email='" + email + '\'' + '}';
     }
 }
