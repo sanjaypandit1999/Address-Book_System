@@ -6,6 +6,7 @@ public class AddressBook {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         ContactEdit contactinfo = new ContactEdit();
-        contactinfo.addMulAddressBook();
+        contactinfo.addPerson();
+        contactinfo.removePerson();
     }
 }
