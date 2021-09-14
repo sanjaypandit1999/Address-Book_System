@@ -1,7 +1,5 @@
 package com.Bridgelabz;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 public class AddressBook {
