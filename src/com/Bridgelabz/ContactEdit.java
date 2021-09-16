@@ -184,6 +184,7 @@ public class ContactEdit {
                             if (!contactList.isEmpty())
                                 searchResult.put(keyOfBook, contactList);
                         }
+                        System.out.println(searchResult);
                         break;
                     case 2:
                         System.out.println("Enter The State For Search Persons");
@@ -197,6 +198,7 @@ public class ContactEdit {
                             if (!contactList.isEmpty())
                                 searchResult.put(keyOfBook, contactList);
                         }
+                        System.out.println(searchResult);
                         break;
                 }
     }
