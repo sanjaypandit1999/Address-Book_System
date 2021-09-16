@@ -7,10 +7,10 @@ import java.util.Scanner;
 import java.util.*;
 
 public class ContactEdit {
-    HashMap<String, ArrayList<PersonInfo>> contactBook = new HashMap<>();
+    Map<String, List<PersonInfo>> contactBook = new HashMap<>();
     Scanner scanner = new Scanner(System.in);
 
-    public ArrayList<PersonInfo> addPerson(ArrayList<PersonInfo> contactList) {
+    public List<PersonInfo> addPerson(List<PersonInfo> contactList) {
         try {
             System.out.println("Enter following details \n" +
                     "First Name :");
@@ -49,13 +49,13 @@ public class ContactEdit {
         return contactList;
     }
 
-    public void displayPerson(ArrayList<PersonInfo> contactList) {
+    public void displayPerson(List<PersonInfo> contactList) {
         System.out.println("All contact =  " + contactList.size());
         System.out.println(contactList);
 
     }
 
-    public int searchPerson(String searchName, ArrayList<PersonInfo> contactList) {
+    public int searchPerson(String searchName, List<PersonInfo> contactList) {
         try {
             for (int i = 0; i < contactList.size(); i++) {
                 if (contactList.get(i).getFirstName().equals(searchName)) {
@@ -68,7 +68,7 @@ public class ContactEdit {
         return -1;
     }
 
-    public void editPerson(ArrayList<PersonInfo> contactList) {
+    public void editPerson(List<PersonInfo> contactList) {
         try {
             System.out.println("Enter a firstname you want to edit...");
             String name = scanner.next();
@@ -149,7 +149,7 @@ public class ContactEdit {
     }
 
 
-    public void removePerson(ArrayList<PersonInfo> contactList) {
+    public void removePerson(List<PersonInfo> contactList) {
         try {
             System.out.println("Enter a name you want to delete...");
             String deleteName = scanner.next();
@@ -167,43 +167,33 @@ public class ContactEdit {
 
     public void searchInLocation() {
         try {
-            Hashtable<String, List<String>> searchResult = new Hashtable<>();
-            List<String> contactList;
-            System.out.println("1.City   \n " +
-                    "2.State  \n");
+            System.out.println("1.Find contact Search by City   \n " +
+                               "2.Find contact Search by State  \n");
             int input = scanner.nextInt();
             switch (input) {
                 case 1:
-                    System.out.println("Enter The City For Search Persons ");
-                    String nameSearchByCity = scanner.next();
+                    System.out.println("Enter The City Name For Find BookInfo ");
+                    String enterCity = scanner.next();
                     for (String keyOfBook : contactBook.keySet()) {
-                        contactList = new ArrayList<>();
-                        for (int index = 0; index < contactBook.get(keyOfBook).size(); index++) {
-                            if (contactBook.get(keyOfBook).get(index).getCity().equals(nameSearchByCity))
-                                contactList.add(contactBook.get(keyOfBook).get(index).getFirstName());
-                        }
-                        if (!contactList.isEmpty())
-                            searchResult.put(keyOfBook, contactList);
+                        contactBook.get(keyOfBook)
+                                   .stream()
+                                   .filter(personInfo ->enterCity.equals(personInfo.getCity()))
+                                   .forEach(System.out::println);
                     }
-                    System.out.println(searchResult);
                     break;
                 case 2:
-                    System.out.println("Enter The State For Search Persons");
+                    System.out.println("Enter The State Name For Find BookInfo ");
                     String nameForState = scanner.next();
                     for (String keyOfBook : contactBook.keySet()) {
-                        contactList = new ArrayList<>();
-                        for (int index = 0; index < contactBook.get(keyOfBook).size(); index++) {
-                            if (contactBook.get(keyOfBook).get(index).getState().equals(nameForState))
-                                contactList.add(contactBook.get(keyOfBook).get(index).getFirstName());
-                        }
-                        if (!contactList.isEmpty())
-                            searchResult.put(keyOfBook, contactList);
+                        contactBook.get(keyOfBook)
+                                   .stream()
+                                   .filter(contactInfo->nameForState.equals(contactInfo.getState()))
+                                   .forEach(System.out::println);
                     }
-                    System.out.println(searchResult);
                     break;
             }
         }catch (Exception e){
-            System.out.println(e);
+            System.out.println("Please enter correct");
         }
     }
 
@@ -221,11 +211,11 @@ public class ContactEdit {
                 }
             }
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("Please enter correct");
         }
     }
 
-    public ArrayList<PersonInfo> addMulPerson(ArrayList<PersonInfo> contactList, HashMap<String, ArrayList<PersonInfo>>contactBook, String name) {
+    public void addMulPerson(List<PersonInfo> contactList, Map<String, List<PersonInfo>>contactBook, String name) {
         try {
             boolean found = true;
             while (found) {
@@ -239,7 +229,7 @@ public class ContactEdit {
 
                 switch (choice) {
                     case 1:
-                        ArrayList<PersonInfo> mulContact = addPerson(contactList);
+                        List<PersonInfo> mulContact = addPerson(contactList);
                         contactBook.put(name, mulContact);
                         break;
                     case 2:
@@ -260,7 +250,6 @@ public class ContactEdit {
         }catch (Exception e){
             System.out.println("Please enter the correct details");
         }
-        return contactList;
     }
 
     public void addMulAddressBook() {
@@ -279,7 +268,7 @@ public class ContactEdit {
                     case 1:
                         System.out.println("Enter name for Address book");
                         String newBook = scanner.next();
-                        ArrayList<PersonInfo> contactList = new ArrayList<>();
+                        List<PersonInfo> contactList = new ArrayList<>();
                         if (contactBook.containsKey(newBook))
                             System.out.println("Book already exists");
                         else
@@ -320,7 +309,7 @@ public class ContactEdit {
                 }
             }
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("Please enter correct " + e);
         }
     }
 }
