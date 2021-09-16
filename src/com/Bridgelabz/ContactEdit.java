@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ContactEdit {
     Map<String, List<PersonInfo>> contactBook = new HashMap<>();
@@ -41,6 +42,10 @@ public class ContactEdit {
                 String email = scanner.next();
                 contact.setEmail(email);
                 contactList.add(contact);
+                contactList = contactList
+                        .stream()
+                        .sorted(Comparator.comparing(PersonInfo::getFirstName))
+                        .collect(Collectors.toList());
             } else
                 System.out.println("Name already exist");
         } catch (InputMismatchException e) {
