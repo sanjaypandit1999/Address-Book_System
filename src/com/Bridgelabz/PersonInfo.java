@@ -85,6 +85,7 @@ public class PersonInfo {
                 ", state='" + state + '\'' +
                 ", zip=" + zip +
                 ", phoneNo=" + phoneNo +
-                ", email='" + email + '\'' + '}';
+                ", email='" + email + '\'' +
+                '}';
     }
 }
