@@ -166,41 +166,63 @@ public class ContactEdit {
     }
 
     public void searchInLocation() {
-        Hashtable<String, List<String>> searchResult = new Hashtable<>();
-        List<String> contactList;
-                System.out.println("1.City   \n " +
-                                   "2.State  \n" );
-                int input = scanner.nextInt();
-                switch (input) {
-                    case 1:
-                        System.out.println("Enter The City For Search Persons ");
-                        String nameSearchByCity = scanner.next();
-                        for (String keyOfBook : contactBook.keySet()) {
-                            contactList = new ArrayList<>();
-                            for (int index = 0; index < contactBook.get(keyOfBook).size(); index++) {
-                                if (contactBook.get(keyOfBook).get(index).getCity().equals(nameSearchByCity))
-                                    contactList.add(contactBook.get(keyOfBook).get(index).getFirstName());
-                            }
-                            if (!contactList.isEmpty())
-                                searchResult.put(keyOfBook, contactList);
+        try {
+            Hashtable<String, List<String>> searchResult = new Hashtable<>();
+            List<String> contactList;
+            System.out.println("1.City   \n " +
+                    "2.State  \n");
+            int input = scanner.nextInt();
+            switch (input) {
+                case 1:
+                    System.out.println("Enter The City For Search Persons ");
+                    String nameSearchByCity = scanner.next();
+                    for (String keyOfBook : contactBook.keySet()) {
+                        contactList = new ArrayList<>();
+                        for (int index = 0; index < contactBook.get(keyOfBook).size(); index++) {
+                            if (contactBook.get(keyOfBook).get(index).getCity().equals(nameSearchByCity))
+                                contactList.add(contactBook.get(keyOfBook).get(index).getFirstName());
                         }
-                        System.out.println(searchResult);
-                        break;
-                    case 2:
-                        System.out.println("Enter The State For Search Persons");
-                        String nameForState = scanner.next();
-                        for (String keyOfBook : contactBook.keySet()) {
-                            contactList = new ArrayList<>();
-                            for (int index = 0; index < contactBook.get(keyOfBook).size(); index++) {
-                                if (contactBook.get(keyOfBook).get(index).getState().equals(nameForState))
-                                    contactList.add(contactBook.get(keyOfBook).get(index).getFirstName());
-                            }
-                            if (!contactList.isEmpty())
-                                searchResult.put(keyOfBook, contactList);
+                        if (!contactList.isEmpty())
+                            searchResult.put(keyOfBook, contactList);
+                    }
+                    System.out.println(searchResult);
+                    break;
+                case 2:
+                    System.out.println("Enter The State For Search Persons");
+                    String nameForState = scanner.next();
+                    for (String keyOfBook : contactBook.keySet()) {
+                        contactList = new ArrayList<>();
+                        for (int index = 0; index < contactBook.get(keyOfBook).size(); index++) {
+                            if (contactBook.get(keyOfBook).get(index).getState().equals(nameForState))
+                                contactList.add(contactBook.get(keyOfBook).get(index).getFirstName());
                         }
-                        System.out.println(searchResult);
-                        break;
+                        if (!contactList.isEmpty())
+                            searchResult.put(keyOfBook, contactList);
+                    }
+                    System.out.println(searchResult);
+                    break;
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    public void getMobileNo(String name){
+        try {
+            for (String keyOfBook : contactBook.keySet()) {
+                for (int index = 0; index < contactBook.get(keyOfBook).size(); index++) {
+                    if (contactBook.get(keyOfBook).get(index).getFirstName().equals(name)) {
+
+                        String lastName = contactBook.get(keyOfBook).get(index).getLastName();
+                        long phoneNo = contactBook.get(keyOfBook).get(index).getPhoneNo();
+
+                        System.out.println("Book Name" +keyOfBook + " : " + name + " " + lastName + "Mobile No --> " + phoneNo);
+                    }
                 }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     public ArrayList<PersonInfo> addMulPerson(ArrayList<PersonInfo> contactList, HashMap<String, ArrayList<PersonInfo>>contactBook, String name) {
@@ -249,6 +271,7 @@ public class ContactEdit {
                         "2. Continue with existing address book \n" +
                         "3. All books \n" +
                         "4. search location \n" +
+                        "5. Get Mobile No  \n" +
                         "0. EXIT");
                 int choice = scanner.nextInt();
 
@@ -287,6 +310,10 @@ public class ContactEdit {
                     case 4:
                         searchInLocation();
                         break;
+                    case 5:
+                        System.out.println("Enter First Name");
+                        String nameForContact = scanner.next();
+                        getMobileNo(nameForContact);
 
                     default:
                         System.exit(0);
