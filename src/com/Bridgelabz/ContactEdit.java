@@ -177,24 +177,27 @@ public class ContactEdit {
             int input = scanner.nextInt();
             switch (input) {
                 case 1:
-                    System.out.println("Enter The City Name For Find BookInfo ");
+                    System.out.println("Enter The City Name For Find PersonInfo ");
                     String enterCity = scanner.next();
-                    for (String keyOfBook : contactBook.keySet()) {
-                        contactBook.get(keyOfBook)
-                                   .stream()
-                                   .filter(personInfo ->enterCity.equals(personInfo.getCity()))
-                                   .forEach(System.out::println);
-                    }
+                    contactBook.keySet().forEach(keyBook -> {
+                        List<PersonInfo> personInfoList = contactBook.get(keyBook).stream()
+                                                         .filter(n -> n.getCity().equals(enterCity))
+                                                         .collect(Collectors.toList());
+                        System.out.println("Address book name  " + keyBook + " Person info size is " + personInfoList.size());
+                        System.out.println(personInfoList);
+                    });
+
                     break;
                 case 2:
                     System.out.println("Enter The State Name For Find BookInfo ");
-                    String nameForState = scanner.next();
-                    for (String keyOfBook : contactBook.keySet()) {
-                        contactBook.get(keyOfBook)
-                                   .stream()
-                                   .filter(contactInfo->nameForState.equals(contactInfo.getState()))
-                                   .forEach(System.out::println);
-                    }
+                    String enterState = scanner.next();
+                    contactBook.keySet().forEach(keyBook -> {
+                        List<PersonInfo> personInfoList = contactBook.get(keyBook).stream()
+                                .filter(n -> n.getCity().equals(enterState))
+                                .collect(Collectors.toList());
+                        System.out.println("Address book name  " + keyBook + " Person info size is " + personInfoList.size());
+                        System.out.println(personInfoList);
+                    });
                     break;
             }
         }catch (Exception e){
@@ -217,6 +220,60 @@ public class ContactEdit {
             }
         } catch (Exception e) {
             System.out.println("Please enter correct");
+        }
+    }
+
+    public void sortPerson() {
+        try {
+            boolean run = true;
+            while (run) {
+                System.out.println("How Would you like to sort\n" +
+                        "1. By City\n" +
+                        "2. By State\n" +
+                        "3. By Zip\n" +
+                        "0. EXIT");
+                int choice = scanner.nextInt();
+                switch (choice) {
+                    case 1:
+                        System.out.println("Sorted by city");
+                        contactBook.keySet().forEach(keyOfBook -> {
+                            List<PersonInfo> personInfoList = contactBook.get(keyOfBook)
+                                    .stream()
+                                    .sorted(Comparator.comparing(PersonInfo::getCity))
+                                    .collect(Collectors.toList());
+                            System.out.println(personInfoList);
+
+                        });
+                        break;
+                    case 2:
+                        System.out.println("Sorted by state");
+                        contactBook.keySet().forEach(keyOfBook -> {
+                            List<PersonInfo> personInfoList = contactBook.get(keyOfBook)
+                                    .stream()
+                                    .sorted(Comparator
+                                            .comparing(PersonInfo::getState))
+                                    .collect(Collectors.toList());
+                            System.out.println(personInfoList);
+                        });
+                        break;
+                    case 3:
+                        System.out.println("Sorted By Zip");
+                        contactBook.keySet().forEach(keyOfBook -> {
+                            List<PersonInfo> personInfoList = contactBook.get(keyOfBook)
+                                    .stream()
+                                    .sorted(Comparator
+                                            .comparing(PersonInfo::getZip))
+                                    .collect(Collectors.toList());
+                            System.out.println(personInfoList);
+                        });
+                        break;
+                    case 0:
+                        run = false;
+                        break;
+                }
+            }
+        }catch (Exception e){
+            System.out.println("Please correct " +e);
         }
     }
 
@@ -263,9 +320,10 @@ public class ContactEdit {
                 System.out.println("\nWhat would you like to do? \n" +
                         "1. Crate new address book \n" +
                         "2. Continue with existing address book \n" +
-                        "3. All books \n" +
-                        "4. search location \n" +
+                        "3. Display All books \n" +
+                        "4. PersonInfo search By CIty/State  \n" +
                         "5. Get Mobile No  \n" +
+                        "6. Sort PersonInfo\n" +
                         "0. EXIT");
                 int choice = scanner.nextInt();
 
@@ -308,6 +366,9 @@ public class ContactEdit {
                         System.out.println("Enter First Name");
                         String nameForContact = scanner.next();
                         getMobileNo(nameForContact);
+                    case 6:
+                        sortPerson();
+                        break;
 
                     default:
                         System.exit(0);
