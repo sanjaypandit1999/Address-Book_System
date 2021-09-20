@@ -153,7 +153,6 @@ public class ContactEdit {
         }
     }
 
-
     public void removePerson(List<PersonInfo> contactList) {
         try {
             System.out.println("Enter a name you want to delete...");
@@ -315,6 +314,7 @@ public class ContactEdit {
     }
 
     public void addMulAddressBook() {
+        AddressBookService addressBookService = new AddressBookService();
         try {
             while (true) {
                 System.out.println("\nWhat would you like to do? \n" +
@@ -336,13 +336,13 @@ public class ContactEdit {
                             System.out.println("Book already exists");
                         else
                         addMulPerson(contactList, contactBook, newBook);
+                        addressBookService.writeAddressBook(contactBook);
                         break;
 
                     case 2:
                         System.out.println(contactBook.keySet());
                         System.out.println("Which address book do you want to access?");
                         String existingBook = scanner.next();
-
                         if (contactBook.containsKey(existingBook)) {
                             contactList = contactBook.get(existingBook);
                             addMulPerson(contactList, contactBook, existingBook);
@@ -356,8 +356,8 @@ public class ContactEdit {
                             System.out.println(serialNo + ". " + book );
                             serialNo++;
                         }
-
                         System.out.println("\n" + contactBook);
+                        addressBookService.readAddressBook();
                         break;
                     case 4:
                         searchInLocation();
