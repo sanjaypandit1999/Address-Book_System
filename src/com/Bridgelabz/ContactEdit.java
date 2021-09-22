@@ -8,6 +8,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class ContactEdit {
+    AddressbookJson addressbookJson = new AddressbookJson();
     Map<String, List<PersonInfo>> contactBook = new HashMap<>();
     Scanner scanner = new Scanner(System.in);
 
@@ -336,7 +337,7 @@ public class ContactEdit {
                             System.out.println("Book already exists");
                         else
                         addMulPerson(contactList, contactBook, newBook);
-                        addressBookService.writeAddressBook(contactBook);
+                        addressbookJson.writeAddressBook(contactBook);
                         break;
 
                     case 2:
@@ -346,6 +347,7 @@ public class ContactEdit {
                         if (contactBook.containsKey(existingBook)) {
                             contactList = contactBook.get(existingBook);
                             addMulPerson(contactList, contactBook, existingBook);
+                            addressbookJson.writeAddressBook(contactBook);
                         } else
                             System.out.println("Book not found");
                         break;
@@ -357,7 +359,7 @@ public class ContactEdit {
                             serialNo++;
                         }
                         System.out.println("\n" + contactBook);
-                        addressBookService.readAddressBook();
+                        addressbookJson.readAddressBookJson(contactBook);
                         break;
                     case 4:
                         searchInLocation();
