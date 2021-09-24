@@ -347,7 +347,6 @@ public class ContactEdit {
                         if (contactBook.containsKey(existingBook)) {
                             contactList = contactBook.get(existingBook);
                             addMulPerson(contactList, contactBook, existingBook);
-                            addressbookJson.writeAddressBook(contactBook);
                         } else
                             System.out.println("Book not found");
                         break;

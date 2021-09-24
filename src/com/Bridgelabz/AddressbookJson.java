@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class AddressbookJson {
-    String filePath = "C:\\Users\\Sanju\\Desktop\\Address-Book_System\\src\\com\\Bridgelabz\\Person-Details.gson";
+    String filePath = "C:\\Users\\Sanju\\Desktop\\Address-Book_System\\src\\com\\Bridgelabz\\Person-Details.json";
     public void writeAddressBook(Map<String, List<PersonInfo>> contactBook){
         Gson gson = new Gson();
         try {
